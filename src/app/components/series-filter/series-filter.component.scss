@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.series-filter__form {
+  display: flex;
+  width: 100%;
+}
+
+.series-filter__control {
+  flex-grow: 1;
+
+  &:not(:last-child) {
+    margin-right: 3rem;
+ }
+}

@@ -8,11 +8,12 @@ import { AppSeriesFilter, Genre } from '../../models';
 @Component({
   selector: 'app-series-filter',
   templateUrl: './series-filter.component.html',
-  styleUrls: ['./series-filter.component.css'],
+  styleUrls: ['./series-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SeriesFilterComponent implements OnInit {
-  @Input() public yearOptions: number[];
+  @Input() public yearOptions: AppSeriesFilter['premiereYear'];
+  @Input() public networkOptions: AppSeriesFilter['network'];
 
   @Input() public set filters(value: AppSeriesFilter) {
     this.filtersFormGroup.setValue(value, { emitEvent: false });
@@ -37,12 +38,15 @@ export class SeriesFilterComponent implements OnInit {
 
   public trackByGenre: TrackByFunction<Genre> = ({}, genre) => genre;
 
+  public trackByNetwork: TrackByFunction<string> = ({}, network) => network;
+
   public trackByYear: TrackByFunction<number> = ({}, year) => year;
 
   private buildFiltersForm(): FormGroup {
     return this.formBuilder.group({
       name: [''],
       genre: [''],
+      network: [''],
       premiereYear: [''],
     });
   }

@@ -14,6 +14,12 @@ export class SeriesStoreService {
     return filteredSeries.slice(startIndex, startIndex + count);
   }
 
+  public getNetworks(): string[] {
+    return [
+      ...new Set(this.seriesStore.reduce((acc, series) => [...acc, ...series.networks], []))
+    ];
+  }
+
   public getYearsRange(): YearsRange {
     const sortedPremiers = this.seriesStore.map(series => series.premiere).sort((a, b) => a - b);
     return {
@@ -25,6 +31,7 @@ export class SeriesStoreService {
   private filterByComplexValue(series: Series, filters: SeriesFilter): boolean {
     return this.matchByName(series.name, filters.name)
       && this.matchByGenres(series.genres, filters.genres)
+      && this.matchByNetworks(series.networks, filters.networks)
       && this.matchByPremiere(series.premiere, filters.premiereFrom, filters.premiereTo);
   }
 
@@ -34,6 +41,10 @@ export class SeriesStoreService {
 
   private matchByGenres(genres: Series['genres'], filterValue: Series['genres']): boolean {
     return filterValue.length === 0 || filterValue.some(filterGenre => genres.includes(filterGenre));
+  }
+
+  private matchByNetworks(networks: Series['networks'], filterValue: Series['networks']): boolean {
+    return filterValue.length === 0 || filterValue.some(filterNetwork => networks.includes(filterNetwork));
   }
 
   private matchByPremiere(

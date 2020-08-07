@@ -11,6 +11,7 @@ export class AppService {
   private readonly filters$: BehaviorSubject<AppSeriesFilter> = new BehaviorSubject({
     name: '',
     genre: '',
+    network: '',
     premiereYear: '',
   });
   private page = 0;
@@ -25,6 +26,10 @@ export class AppService {
 
   public getSeriesStream(): Observable<Series[]> {
     return this.series$.asObservable();
+  }
+
+  public getNetworksFilterOptions(): AppSeriesFilter['network'][] {
+    return this.seriesStoreService.getNetworks();
   }
 
   public getYearsFilterOptions(): AppSeriesFilter['premiereYear'][] {
@@ -51,6 +56,7 @@ export class AppService {
     return {
       name: filters.name,
       genres: coerceArray(filters.genre || []),
+      networks: coerceArray(filters.network || []),
       premiereFrom: filters.premiereYear && +new Date(0).setUTCFullYear(filters.premiereYear),
       premiereTo: filters.premiereYear && (new Date(0).setUTCFullYear(filters.premiereYear + 1) - 1),
     };

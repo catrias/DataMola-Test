@@ -15,13 +15,15 @@ export class AppComponent implements OnInit {
   public series$: Observable<Series[]>;
   public filters$: Observable<AppSeriesFilter>;
   public yearsFilterOptions: AppSeriesFilter['premiereYear'][];
+  public networksFilterOptions: AppSeriesFilter['network'][];
 
   constructor(private appService: AppService) {
   }
 
   public ngOnInit(): void {
     this.yearsFilterOptions = this.appService.getYearsFilterOptions();
-    console.log(this.yearsFilterOptions);
+    this.networksFilterOptions = this.appService.getNetworksFilterOptions();
+
     this.series$ = this.appService.getSeriesStream();
     this.filters$ = this.appService.getFiltersStream();
     this.appService.loadNextPage();

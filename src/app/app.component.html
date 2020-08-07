@@ -1,5 +1,6 @@
 <app-series-filter
   [filters]="filters$ | async"
+  [networkOptions]="networksFilterOptions"
   [yearOptions]="yearsFilterOptions"
   (filtersChanged)="onFiltersChanged($event)"
 ></app-series-filter>

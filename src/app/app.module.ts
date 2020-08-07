@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CdkTableModule } from '@angular/cdk/table';
 
 import { SeriesStoreModule } from './modules/series-store';
 import { generateSeries } from './init';
@@ -17,7 +16,6 @@ import { DATE_FORMAT } from './app.tokens';
   ],
   imports: [
     BrowserModule,
-    CdkTableModule,
     SeriesStoreModule.withSeries(generateSeries()),
   ],
   providers: [

@@ -1,0 +1,44 @@
+.series-table__header,
+.series-table__row {
+  display: flex;
+}
+
+.series-table__header {
+  background: purple;
+  color: #fff;
+  font-size: 1.6rem;
+  height: 3rem;
+}
+
+.series-table__row {
+  font-size: 2rem;
+  height: 5rem;
+}
+
+.series-table__cell {
+  align-items: center;
+  display: flex;
+  padding: 0 1rem;
+}
+
+.series-table__name {
+  flex: 0 0 35%;
+}
+
+.series-table__season,
+.series-table__network,
+.series-table__premiere {
+  justify-content: center;
+}
+
+.series-table__season {
+  flex: 0 0 15%
+}
+
+.series-table__network {
+  flex: 0 0 25%
+}
+
+.series-table__premiere {
+  flex: 0 0 25%
+}

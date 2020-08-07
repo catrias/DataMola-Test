@@ -1,0 +1,21 @@
+<div class="series-table__header">
+  <div class="series-table__cell series-table__name">Name</div>
+  <div class="series-table__cell series-table__season">Season</div>
+  <div class="series-table__cell series-table__network">Network</div>
+  <div class="series-table__cell series-table__premiere">Premiere</div>
+</div>
+
+<div class="series-table__row" *ngFor="let row of series; trackBy: trackByNameAndSeason">
+  <div class="series-table__cell series-table__name">
+    {{ row.name }}
+  </div>
+  <div class="series-table__cell series-table__season">
+    {{ row.season }}
+  </div>
+  <div class="series-table__cell series-table__network">
+    {{ row.networks | appJoin : ', ' }}
+  </div>
+  <div class="series-table__cell series-table__premiere">
+    {{ row.premiere | date : dateFormat }}
+  </div>
+</div>

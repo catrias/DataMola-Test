@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output, TrackByFunction } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output, TrackByFunction } from '@angular/core';
 
 import { AppSeries } from '../../models';
 import { DATE_FORMAT } from '../../app.tokens';
@@ -7,6 +7,7 @@ import { DATE_FORMAT } from '../../app.tokens';
   selector: 'app-series-table',
   templateUrl: './series-table.component.html',
   styleUrls: ['./series-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SeriesTableComponent {
   @Input() public series: AppSeries[];

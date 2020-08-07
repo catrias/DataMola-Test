@@ -1,1 +1,10 @@
-<app-series-table [series]="series" (scrolledToLast)="onScrolledToLast()"></app-series-table>
+<app-series-filter
+  [filters]="filters$ | async"
+  [yearOptions]="yearsFilterOptions"
+  (filtersChanged)="onFiltersChanged($event)"
+></app-series-filter>
+
+<app-series-table
+  [series]="series$ | async"
+  (scrolledToLast)="onScrolledToLast()"
+></app-series-table>

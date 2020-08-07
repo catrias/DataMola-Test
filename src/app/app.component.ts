@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { SeriesStoreService } from './modules/series-store';
-import { AppSeries } from './models';
+import { AppSeriesFilter } from './models';
+import { AppService } from './app.service';
+import { Series } from './modules/series-store/models';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +12,26 @@ import { AppSeries } from './models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  public series: AppSeries[];
-  public page = 0;
-  public readonly seriesPerPage = 20;
+  public series$: Observable<Series[]>;
+  public filters$: Observable<AppSeriesFilter>;
+  public yearsFilterOptions: AppSeriesFilter['premiereYear'][];
 
-  constructor(private seriesStoreService: SeriesStoreService<AppSeries>) {
+  constructor(private appService: AppService) {
   }
 
   public ngOnInit(): void {
-    this.series = this.seriesStoreService.get(this.page, this.seriesPerPage);
+    this.yearsFilterOptions = this.appService.getYearsFilterOptions();
+    console.log(this.yearsFilterOptions);
+    this.series$ = this.appService.getSeriesStream();
+    this.filters$ = this.appService.getFiltersStream();
+    this.appService.loadNextPage();
+  }
+
+  public onFiltersChanged(newFilters: AppSeriesFilter): void {
+    this.appService.updateFilters(newFilters);
   }
 
   public onScrolledToLast(): void {
-    this.page += 1;
-    const newSeries = this.seriesStoreService.get(this.page, this.seriesPerPage);
-    this.series = [...this.series, ...newSeries];
+    this.appService.loadNextPage();
   }
 }

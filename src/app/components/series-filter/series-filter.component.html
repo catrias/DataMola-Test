@@ -1,0 +1,21 @@
+<form class="series-filter__form" [formGroup]="filtersFormGroup">
+  <mat-form-field>
+    <mat-placeholder>Name</mat-placeholder>
+    <input type="search" matInput formControlName="name">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-placeholder>Genre</mat-placeholder>
+    <mat-select formControlName="genre">
+      <mat-option *ngFor="let genre of genres; trackBy: trackByGenre" [value]="genre">{{ genre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-placeholder>Premiere year</mat-placeholder>
+    <mat-select formControlName="premiereYear">
+      <mat-option *ngFor="let year of yearOptions; trackBy: trackByYear" [value]="year">{{ year }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

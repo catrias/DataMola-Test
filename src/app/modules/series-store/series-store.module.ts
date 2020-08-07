@@ -10,7 +10,7 @@ import { SERIES_STORE } from './series-store.tokens';
   ],
 })
 export class SeriesStoreModule {
-  static withSeries(series: Series[]): ModuleWithProviders<SeriesStoreModule> {
+  static withSeries<T extends Series>(series: T[]): ModuleWithProviders<SeriesStoreModule> {
     return {
       ngModule: SeriesStoreModule,
       providers: [

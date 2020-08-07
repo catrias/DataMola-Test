@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+.series-filter__form {
+  column-gap: 3rem;
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr;
+  width: 100%;
+}

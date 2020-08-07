@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output, TrackByFunction } from '@angular/core';
 
-import { AppSeries } from '../../models';
+import { Series } from '../../modules/series-store';
 import { DATE_FORMAT } from '../../app.tokens';
 
 @Component({
@@ -10,7 +10,7 @@ import { DATE_FORMAT } from '../../app.tokens';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SeriesTableComponent {
-  @Input() public series: AppSeries[];
+  @Input() public series: Series[];
   @Output() public readonly scrolledToLast: EventEmitter<void> = new EventEmitter();
 
   constructor(@Inject(DATE_FORMAT) public dateFormat: string) {
@@ -20,5 +20,5 @@ export class SeriesTableComponent {
     this.scrolledToLast.emit();
   }
 
-  public trackByNameAndSeason: TrackByFunction<AppSeries> = ({}, item) => item.name + item.season;
+  public trackByNameAndSeason: TrackByFunction<Series> = ({}, item) => item.name + item.season;
 }

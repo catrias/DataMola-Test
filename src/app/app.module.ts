@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { IntersectionModule } from './modules/intersection';
 import { SeriesStoreModule } from './modules/series-store';
 import { generateSeries } from './init';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { DATE_FORMAT } from './app.tokens';
   ],
   imports: [
     BrowserModule,
+    IntersectionModule,
     SeriesStoreModule.withSeries(generateSeries()),
   ],
   providers: [

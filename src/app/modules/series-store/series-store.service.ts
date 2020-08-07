@@ -8,7 +8,8 @@ export class SeriesStoreService<T = Series> {
   constructor(@Inject(SERIES_STORE) private seriesStore: T[]) {
   }
 
-  public getAll(): T[] {
-    return this.seriesStore.slice();
+  public get(page: number, count: number): T[] {
+    const startIndex = page * count;
+    return this.seriesStore.slice(startIndex, startIndex + count);
   }
 }

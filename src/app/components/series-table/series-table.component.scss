@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .series-table__header,
 .series-table__row {
   display: flex;
@@ -8,6 +14,10 @@
   color: #fff;
   font-size: 1.6rem;
   height: 3rem;
+}
+
+.series-table__rows-container {
+  overflow: auto;
 }
 
 .series-table__row {
@@ -41,4 +51,8 @@
 
 .series-table__premiere {
   flex: 0 0 25%
+}
+
+.series-table__loader {
+  padding-bottom: 4rem;
 }

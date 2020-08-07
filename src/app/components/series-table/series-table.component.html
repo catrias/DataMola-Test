@@ -5,17 +5,21 @@
   <div class="series-table__cell series-table__premiere">Premiere</div>
 </div>
 
-<div class="series-table__row" *ngFor="let row of series; trackBy: trackByNameAndSeason">
-  <div class="series-table__cell series-table__name">
-    {{ row.name }}
+<div class="series-table__rows-container" appIntersectionArea>
+  <div class="series-table__row" *ngFor="let row of series; trackBy: trackByNameAndSeason">
+    <div class="series-table__cell series-table__name">
+      {{ row.name }}
+    </div>
+    <div class="series-table__cell series-table__season">
+      {{ row.season }}
+    </div>
+    <div class="series-table__cell series-table__network">
+      {{ row.networks | appJoin : ', ' }}
+    </div>
+    <div class="series-table__cell series-table__premiere">
+      {{ row.premiere | date : dateFormat }}
+    </div>
   </div>
-  <div class="series-table__cell series-table__season">
-    {{ row.season }}
-  </div>
-  <div class="series-table__cell series-table__network">
-    {{ row.networks | appJoin : ', ' }}
-  </div>
-  <div class="series-table__cell series-table__premiere">
-    {{ row.premiere | date : dateFormat }}
-  </div>
+
+  <div class="series-table__loader" appIntersectionTarget (intersected)="onScrolledToLast()"></div>
 </div>

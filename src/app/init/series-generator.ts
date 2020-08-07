@@ -1,5 +1,5 @@
-import { Genre, Series } from '../models';
 import { GENERATOR_CONFIG, NETWORKS, SERIES } from './config';
+import { AppSeries, Genre } from '../models';
 
 const getRandomArbitrary = (min, max) => Math.ceil(Math.random() * (max - min) + min);
 
@@ -7,7 +7,7 @@ const getRandomValuesFromArray = (array, count) => array.slice()
   .sort(() => .5 - Math.random())
   .slice(0, count);
 
-export function generateSeries(): Series[] {
+export function generateSeries(): AppSeries[] {
   return SERIES.reduce((acc, seriesName) => {
     const networks = getRandomValuesFromArray(NETWORKS, GENERATOR_CONFIG.networksCount);
     const genres = getRandomValuesFromArray(Object.values(Genre), GENERATOR_CONFIG.genresCount);

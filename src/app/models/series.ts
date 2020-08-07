@@ -1,9 +1,4 @@
+import { Series } from '../modules/series-store';
 import { Genre } from './genre';
 
-export interface Series {
-  readonly name: string;
-  readonly genres: Genre[];
-  readonly season: number;
-  readonly networks: string[];
-  readonly premiere: number;
-}
+export type AppSeries = Series<Genre>;

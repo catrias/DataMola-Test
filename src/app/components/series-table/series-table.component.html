@@ -9,6 +9,13 @@
   <div class="series-table__row" *ngFor="let row of series; trackBy: trackByNameAndSeason">
     <div class="series-table__cell series-table__name">
       {{ row.name }}
+      <div class="series-table__genres-container">
+        <app-genre-label
+          class="series-table__genre-label"
+          *ngFor="let genre of row.genres"
+          [genre]="genre"
+        ></app-genre-label>
+      </div>
     </div>
     <div class="series-table__cell series-table__season">
       {{ row.season }}

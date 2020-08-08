@@ -22,7 +22,8 @@
 
 .series-table__row {
   font-size: 2rem;
-  height: 5rem;
+  height: 6rem;
+  padding: 0.5rem 0;
 }
 
 .series-table__cell {
@@ -32,7 +33,23 @@
 }
 
 .series-table__name {
+  align-items: flex-start;
   flex: 0 0 35%;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.series-table__genres-container {
+  display: flex;
+}
+
+.series-table__genre-label {
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
 }
 
 .series-table__season,

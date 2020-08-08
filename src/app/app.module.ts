@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
+import { GenreLabelModule } from './modules/genre-label';
 import { IntersectionModule } from './modules/intersection';
 import { SeriesStoreModule } from './modules/series-store';
 import { generateSeries } from './init';
@@ -25,6 +26,7 @@ import { AppService } from './app.service';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    GenreLabelModule,
     IntersectionModule,
     MatFormFieldModule,
     MatIconModule,

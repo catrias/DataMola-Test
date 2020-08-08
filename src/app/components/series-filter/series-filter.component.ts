@@ -12,8 +12,8 @@ import { AppSeriesFilter, Genre } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SeriesFilterComponent implements OnInit {
-  @Input() public yearOptions: AppSeriesFilter['premiereYear'];
-  @Input() public networkOptions: AppSeriesFilter['network'];
+  @Input() public yearOptions: AppSeriesFilter['premiereYear'][];
+  @Input() public networkOptions: AppSeriesFilter['network'][];
 
   @Input() public set filters(value: AppSeriesFilter) {
     this.filtersFormGroup.setValue(value, { emitEvent: false });

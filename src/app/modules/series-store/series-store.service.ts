@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { Sort } from '@angular/material/sort';
 
 import { SERIES_STORE } from './series-store.tokens';
 import { Series, SeriesFilter, YearsRange } from './models';
@@ -8,10 +9,11 @@ export class SeriesStoreService {
   constructor(@Inject(SERIES_STORE) private seriesStore: Series[]) {
   }
 
-  public get(page: number, count: number, filters: SeriesFilter): Series[] {
+  public get(page: number, count: number, filters: SeriesFilter = {}, sort?: Sort): Series[] {
     const filteredSeries = this.seriesStore.filter(series => this.filterByComplexValue(series, filters));
+    const sortedSeries = sort && sort.direction ? this.sortSeries(filteredSeries, sort) : filteredSeries;
     const startIndex = page * count;
-    return filteredSeries.slice(startIndex, startIndex + count);
+    return sortedSeries.slice(startIndex, startIndex + count);
   }
 
   public getNetworks(): string[] {
@@ -53,5 +55,21 @@ export class SeriesStoreService {
     premiereTo: Series['premiere'],
   ): boolean {
     return (!premiereFrom || premiere >= premiereFrom) && (!premiereTo || premiere <= premiereTo);
+  }
+
+  private sortSeries(series: Series[], sort: Sort): Series[] {
+    const seriesCopy = series.slice();
+
+    return seriesCopy.sort((left, right) => {
+      const leftValue = left[sort.active];
+      const rightValue = right[sort.active];
+      const directionMultiplier = sort.direction === 'desc' ? -1 : 1;
+
+      if (typeof leftValue === 'number' && typeof rightValue === 'number') {
+        return (leftValue - rightValue) * directionMultiplier;
+      }
+
+      return leftValue.toString().localeCompare(rightValue.toString()) * directionMultiplier;
+    });
   }
 }

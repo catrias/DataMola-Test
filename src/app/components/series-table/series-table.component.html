@@ -1,8 +1,14 @@
-<div class="series-table__header">
-  <div class="series-table__cell series-table__name">Name</div>
-  <div class="series-table__cell series-table__season">Season</div>
+<div
+  class="series-table__header"
+  matSort
+  [matSortActive]="sort && sort.active"
+  [matSortDirection]="sort && sort.direction"
+  (matSortChange)="onSortChange($event)"
+>
+  <div class="series-table__cell series-table__name" mat-sort-header="name">Name</div>
+  <div class="series-table__cell series-table__season" mat-sort-header="season">Season</div>
   <div class="series-table__cell series-table__network">Network</div>
-  <div class="series-table__cell series-table__premiere">Premiere</div>
+  <div class="series-table__cell series-table__premiere" mat-sort-header="premiere">Premiere</div>
 </div>
 
 <div class="series-table__rows-container" appIntersectionArea>

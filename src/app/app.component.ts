@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AppSeriesFilter } from './models';
 import { AppService } from './app.service';
 import { Series } from './modules/series-store/models';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { Series } from './modules/series-store/models';
 export class AppComponent implements OnInit {
   public series$: Observable<Series[]>;
   public filters$: Observable<AppSeriesFilter>;
+  public sort$: Observable<Sort>;
   public yearsFilterOptions: AppSeriesFilter['premiereYear'][];
   public networksFilterOptions: AppSeriesFilter['network'][];
 
@@ -26,11 +28,17 @@ export class AppComponent implements OnInit {
 
     this.series$ = this.appService.getSeriesStream();
     this.filters$ = this.appService.getFiltersStream();
-    this.appService.loadNextPage();
+    this.sort$ = this.appService.getSortStream();
+
+    this.appService.reload();
   }
 
   public onFiltersChanged(newFilters: AppSeriesFilter): void {
     this.appService.updateFilters(newFilters);
+  }
+
+  public onSortChanged(sort: Sort): void {
+    this.appService.updateSort(sort);
   }
 
   public onScrolledToLast(): void {

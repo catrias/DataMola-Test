@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { coerceArray } from '@angular/cdk/coercion';
+import { Sort } from '@angular/material/sort';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AppSeriesFilter } from './models';
 import { Series, SeriesFilter, SeriesStoreService } from './modules/series-store';
@@ -14,14 +15,23 @@ export class AppService {
     network: '',
     premiereYear: '',
   });
+  private sort$: BehaviorSubject<Sort> = new BehaviorSubject(undefined);
   private page = 0;
   private seriesForPage = 20;
 
   constructor(private seriesStoreService: SeriesStoreService) {
   }
 
+  public get storeFilters(): SeriesFilter {
+    return this.mapToStoreFilters(this.filters$.value);
+  }
+
   public getFiltersStream(): Observable<AppSeriesFilter> {
     return this.filters$.asObservable();
+  }
+
+  public getSortStream(): Observable<Sort> {
+    return this.sort$.asObservable();
   }
 
   public getSeriesStream(): Observable<Series[]> {
@@ -39,16 +49,29 @@ export class AppService {
       .map(({}, index) => yearsRange.startYear + index);
   }
 
+  public reload(): void {
+    this.page = 0;
+    const newSeries = this.seriesStoreService.get(this.page, this.seriesForPage, this.storeFilters, this.sort$.value);
+    this.series$.next(newSeries);
+  }
+
   public loadNextPage(): void {
     this.page += 1;
-    const newSeries = this.seriesStoreService.get(this.page, this.seriesForPage, this.mapToStoreFilters(this.filters$.value));
+    const newSeries = this.seriesStoreService.get(this.page, this.seriesForPage, this.storeFilters, this.sort$.value);
     this.series$.next([...this.series$.value, ...newSeries]);
   }
 
   public updateFilters(filters: AppSeriesFilter): void {
     this.page = 0;
     this.filters$.next(filters);
-    const newSeries = this.seriesStoreService.get(this.page, this.seriesForPage, this.mapToStoreFilters(this.filters$.value));
+    const newSeries = this.seriesStoreService.get(this.page, this.seriesForPage, this.storeFilters, this.sort$.value);
+    this.series$.next(newSeries);
+  }
+
+  public updateSort(sort: Sort): void {
+    this.page = 0;
+    this.sort$.next(sort);
+    const newSeries = this.seriesStoreService.get(this.page, this.seriesForPage, this.storeFilters, this.sort$.value);
     this.series$.next(newSeries);
   }
 

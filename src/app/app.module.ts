@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 
 import { GenreLabelModule } from './modules/genre-label';
 import { IntersectionModule } from './modules/intersection';
@@ -32,6 +33,7 @@ import { AppService } from './app.service';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatSortModule,
     ReactiveFormsModule,
     SeriesStoreModule.withSeries(generateSeries()),
   ],

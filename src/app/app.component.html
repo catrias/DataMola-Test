@@ -7,5 +7,7 @@
 
 <app-series-table
   [series]="series$ | async"
+  [sort]="sort$ | async"
   (scrolledToLast)="onScrolledToLast()"
+  (sortChange)="onSortChanged($event)"
 ></app-series-table>

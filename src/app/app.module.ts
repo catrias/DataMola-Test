@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 
-import { GenreLabelModule } from './modules/genre-label';
 import { IntersectionModule } from './modules/intersection';
 import { SeriesStoreModule } from './modules/series-store';
 import { generateSeries } from './init';
@@ -17,6 +16,7 @@ import { APP_COMPONENTS } from './components';
 import { APP_PIPES } from './pipes';
 import { DATE_FORMAT } from './app.tokens';
 import { AppService } from './app.service';
+import { LabelModule } from './modules/label';
 
 @NgModule({
   declarations: [
@@ -27,8 +27,8 @@ import { AppService } from './app.service';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    GenreLabelModule,
     IntersectionModule,
+    LabelModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

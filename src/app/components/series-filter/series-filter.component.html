@@ -8,21 +8,36 @@
   <mat-form-field class="series-filter__control">
     <mat-placeholder>Genre</mat-placeholder>
     <mat-select formControlName="genre">
-      <mat-option *ngFor="let genre of genres; trackBy: trackByGenre" [value]="genre">{{ genre }}</mat-option>
+      <mat-option
+        *ngFor="let genre of genres; trackBy: trackByGenre"
+        [value]="genre"
+      >
+        {{ genre }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field class="series-filter__control">
     <mat-placeholder>Network</mat-placeholder>
     <mat-select formControlName="network">
-      <mat-option *ngFor="let network of networkOptions; trackBy: trackByNetwork" [value]="network">{{ network }}</mat-option>
+      <mat-option
+        *ngFor="let network of networkOptions; trackBy: trackByNetwork"
+        [value]="network"
+      >
+        {{ network }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field class="series-filter__control">
     <mat-placeholder>Premiere year</mat-placeholder>
     <mat-select formControlName="premiereYear">
-      <mat-option *ngFor="let year of yearOptions; trackBy: trackByYear" [value]="year">{{ year }}</mat-option>
+      <mat-option
+        *ngFor="let year of yearOptions; trackBy: trackByYear"
+        [value]="year"
+      >
+        {{ year }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 </form>
